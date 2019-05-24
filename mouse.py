@@ -1,9 +1,8 @@
 import numpy as np
 import cv2 as cv
 
-drawing = False
-mode = True
-ix, iy = -1, -1
+def nothing(x):
+    pass
 
 def draw_circle(event, x, y, flags, param):
     global ix, iy, drawing, mode
@@ -26,18 +25,25 @@ def draw_circle(event, x, y, flags, param):
         else:
             cv.circle(img, (x, y), 5, (0, 0, 255), -1)
 
-img = np.zeros((512, 512, 3), np.uint8)
-cv.namedWindow('image')
-cv.setMouseCallback('image', draw_circle)
 
-print("press 'q' to quit")
-while(1):
-    cv.imshow('image', img)
-    k = cv.waitKey(1) & 0xFF
+if __name__ == "__main__":
 
-    if k == ord('m'):
-        mode = not mode
-    elif k == 27:
-        break
+    drawing = False
+    mode = True
+    ix, iy = -1, -1
 
-cv.destroyAllWindows()
+    img = np.zeros((512, 512, 3), np.uint8)
+    cv.namedWindow('image')
+    cv.setMouseCallback('image', draw_circle)
+    
+    print("press 'q' to quit")
+    while(1):
+        cv.imshow('image', img)
+        k = cv.waitKey(1) & 0xFF
+        
+        if k == ord('m'):
+            mode = not mode
+        elif k == 27:
+            break
+
+    cv.destroyAllWindows()
